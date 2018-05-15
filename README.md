@@ -1,3 +1,6 @@
+### Fork
+For of bachelor project for the professional programming course.
+
 #### About the game:
 *The Grass is Always Greener* is an exploration game with a procedurally generated world, where the world gets more corrupted the further you move. The player's goal is to make their way through the corruption and to the end of the world.  
 
