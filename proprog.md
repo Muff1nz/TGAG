@@ -33,6 +33,7 @@
 ### A link to, and discussion of, code you consider bad (Temp title)
 
 ### A link to two pieces of code, a before and after refactoring.  This will include a discussion of why the code was refactored (Temp title)
+https://github.com/Hifoz/TGAG/pull/114/files
 
 ### A personal reflection about professionalism in programming (Temp title)
 
