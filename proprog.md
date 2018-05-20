@@ -6,7 +6,7 @@
 
 ## Group stuff (Temp title)
 
-### Strenghts and weaknesses of languages you used in your project (Temp title)
+### Strengths and weaknesses of languages you used in your project (Temp title)
 
 
 ### How you controlled process and communication systems during development (Temp title)
@@ -26,7 +26,7 @@
 
 ### Use of code review (Temp title)
 
-## Induvidual: Michael (Temp title)
+## Individual: Michael (Temp title)
 
 ### A link to, and discussion of, code you consider good (Temp title)
 
@@ -36,7 +36,7 @@
 
 ### A personal reflection about professionalism in programming (Temp title)
 
-## Induvidual: Martin (Temp title)
+## Individual: Martin (Temp title)
 
 ### A link to, and discussion of, code you consider good (Temp title)
 
@@ -45,3 +45,5 @@
 ### A link to two pieces of code, a before and after refactoring.  This will include a discussion of why the code was refactored (Temp title)
 
 ### A personal reflection about professionalism in programming (Temp title)
+
+
