@@ -55,18 +55,33 @@ Outside of the Unity API and the .NET API we didn’t use any libraries. We did 
 The fact that we document our work, write detailed PR’s, do sprint reviews and meeting logs. 
 
 ### Use of Code Reviews
-In our repository we had made it so that commiting to master was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance.
+In our repository we had made it so that commiting to the master branch was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance.
 
-
-## Individual: Michael (Temp title)
 
-### A link to, and discussion of, code you consider good (Temp title)
+## Individual: Michael
 
-### A link to, and discussion of, code you consider bad (Temp title)
+### Good Code
+TODO
 
-### A link to two pieces of code, a before and after refactoring.  This will include a discussion of why the code was refactored (Temp title)
+### Bad Code
+[Link to code(NaiveMeshDataGenerator.GenerateCubeFace(...))](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)
+
+#### Code Quality
+The code contains a switch in where all branches do the same thing with different numbers, which means there is a lot of repitition, breaking with the DRY principles. It also causes the texture coordinate mapping to be more complex than it needs to (see [NaiveMeshDataGenerator.applyTextureCoordinates(...)](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L265)) because the order of the vertices are different for the different face directions.
+
+
+#### Refactoring the Code
+[Pre-refactor](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)  
+[Post-refactor](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)  
+[Diff](https://github.com/Hifoz/TGAG/pull/114/files)  
+
+The new solution removes the switch statement in favour of using the direction to figure out how to place the vertices. It is more elegant than the old solution and takes up much less space. 
+
+The refactor to NaiveMeshDataGenerator.GenerateCubeFace(...) means that I also had to change [NaiveMeshDataGenerator.applyTextureCoordinates(...)](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L236), because the order of the vertices were different. Because the vertices are added in the same order now for all face directions, I could simplify how we add the texture coordinates.
+
 
 ### A personal reflection about professionalism in programming (Temp title)
+TODO
 
 ## Individual: Martin (Temp title)
 
