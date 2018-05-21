@@ -2,15 +2,15 @@
 ## From submission @confluence
 
 ### A list of the name of the students in the team
-Michael Bråten
-Martin Bjerknes
+Michael Bråten  
+Martin Bjerknes  
 
 ### A list of links to any other repos connected to the project
-Original repo that this is a fork of: https://github.com/Hifoz/TGAG
-Benchmark data visualisation repo: https://github.com/Muff1nz/TGAG_PythonScripts
-KinoFog, the open source fog effect we used: https://github.com/keijiro/KinoFog 
-Mesh Generator Prototype: https://github.com/Hifoz/voxelmesh
-Noise function and ChunkVoxelDataGenerator prototype: https://github.com/Muff1nz/ProcGen-Prototype 
+Original repo that this is a fork of: https://github.com/Hifoz/TGAG  
+Benchmark data visualisation repo: https://github.com/Muff1nz/TGAG_PythonScripts   
+KinoFog, the open source fog effect we used: https://github.com/keijiro/KinoFog  
+Mesh Generator Prototype: https://github.com/Hifoz/voxelmesh  
+Noise function and ChunkVoxelDataGenerator prototype: https://github.com/Muff1nz/ProcGen-Prototype   
 
 
 ## Group Discussion
