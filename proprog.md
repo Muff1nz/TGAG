@@ -1,14 +1,14 @@
 
 ## From submission @confluence
 
-### A list of the name of the students in the team
+### A list of the name of the students in the team  
 Michael Bråten  
 Martin Bjerknes  
 
-### A list of links to any other repos connected to the project
+### A list of links to any other repos connected to the project  
 Original repo that this is a fork of: https://github.com/Hifoz/TGAG  
-Benchmark data visualisation repo: https://github.com/Muff1nz/TGAG_PythonScripts   
-KinoFog, the open source fog effect we used: https://github.com/keijiro/KinoFog  
+Benchmark data visualisation repo: https://github.com/Muff1nz/TGAG_PythonScripts  
+KinoFog, the open source fog effect we used: https://github.com/keijiro/KinoFog   
 Mesh Generator Prototype: https://github.com/Hifoz/voxelmesh  
 Noise function and ChunkVoxelDataGenerator prototype: https://github.com/Muff1nz/ProcGen-Prototype   
 
@@ -37,7 +37,7 @@ For communication and process control we used discord and trello. Discord was us
 
 We made sure to always be available on discord when we were awake, so that we could reach each other on demand. We had an agreement to conduct our sprint reviews in the discord voice chat every wednesday. 
 
-Trello was used as our sprint board, to give us an overview and delegate the various pieces of development. We would make cards for various pieces of work to be done, this could be things such as a new feature or a bug fix. During every sprint review we would each select which cards we would work on during the next sprint. Without trello or a tool like it we would have trouble keeping tabs on what the other team member is working on. Something we could have looked into is integration between trello and GitHub, so that smart commits and pull request could be associated with the trello cards.  
+Trello was used as our sprint board, to give us an overview and delegate the various pieces of development. We would make cards for various pieces of work to be done, this could be things such as a new feature or a bug fix. During every sprint review we would each select which cards we would work on during the next sprint. Without trello or a tool like it we would have trouble keeping tabs on what the other team member is working on. Something we could have looked into is integration between trello and GitHub, so that smart commits and pull request could be associated with the trello cards. 
 
 ### Use of Version Control Systems, Ticket Tracking, Branching, Version Control
 git, github. Before the bachelor we did not use feature branches, now we did. We would check out old commits when inspecting the effects of new changes.  
@@ -54,10 +54,12 @@ Outside of the Unity API and the .NET API we didn’t use any libraries. We did 
 ### Professionalism in Your Approach to Software Development
 The fact that we document our work, write detailed PR’s, do sprint reviews and meeting logs. 
 
+
+
 ### Use of Code Reviews
-In our repository we had made it so that commiting to the master branch was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance.
+In our repository we had made it so that commiting to master was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance. 
 
-
+
 ## Individual: Michael
 
 ### Good Code
@@ -81,22 +83,53 @@ The code contains a switch in where all branches do the same thing with differen
 [Post-refactor](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)  
 [Diff](https://github.com/Hifoz/TGAG/pull/114/files)  
 
-The new solution removes the switch statement in favour of using the direction to figure out how to place the vertices. It is more elegant than the old solution and takes up much less space. 
+The new solution removes the switch statement in favour of using the direction to figure out how to place the vertices. It is more elegant than the old solution and takes up much less space.
 
 The refactor to NaiveMeshDataGenerator.GenerateCubeFace(...) means that I also had to change [NaiveMeshDataGenerator.applyTextureCoordinates(...)](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L236), because the order of the vertices were different. Because the vertices are added in the same order now for all face directions, I could simplify how we add the texture coordinates.
 
 
-### A personal reflection about professionalism in programming (Temp title)
+### A personal reflection about professionalism in programming
 TODO
+
+
 
 ## Individual: Martin (Temp title)
 
-### A link to, and discussion of, code you consider good (Temp title)
+### Good code example
+[BoneKeyFrames](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/BoneKeyFrames.cs)
+Even though this code is used as my example of good code, it has some issues. I did not stick to one of our coding conventions when writing it for instance, we were supposed to explicitly declare the protection level, even if not needed to by the compiler. I did not explicitly declare the member variables as private in this class. 
 
-### A link to, and discussion of, code you consider bad (Temp title)
+BoneKeyFrames is a class for animating bones in an animal with forward kinematics.
 
-### A link to two pieces of code, a before and after refactoring.  This will include a discussion of why the code was refactored (Temp title)
+One good thing about the class is that it throws informative exceptions when something is wrong. BoneKeyFrames contains a set amount of frames for the animation, and the setters will throw an exception if you try to set an amount of key frames that differs from what you specified in the constructor. The exceptions thrown are generic System.Exception exceptions with a message, it could be improved by using a custom exception. The use of exceptions in this way makes the class more robust.
+
+Another good thing is the solution for timing other logic with the animation. Instead of having to time the animation and sync your logic with it in that way, the BoneKeyFrames offers KeyFrameTriggers. A KeyFrameTrigger is a delegate function which is called whenever the BoneKeyFrame switches frames. You can specify one for each frame, or a selection of frames. This was used to sync walking sounds with the animations. 
+
+It also allows for interpolation between two BoneKeyFrames that operate on the same bone. The two BoneKeyFrames do not need to have the same number of key frames or timing, the only requirement is that they operate on the same bone. This gives us a versatile tool for transitioning between different animations. 
+
+The quality of the comments in the class is also good in my opinion, the coding standard was followed and each function has an XML style comment with relevant information. I could have specified in the function comment if the functions threw any exceptions though in retrospect.
+
+### Bad code example
+The [AnimalState](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/AnimalState.cs) is a class containing information about the state of the animal.
+
+The AnimalState class is bad because it breaks with object oriented design by not hiding the underlying implementation. All of its members are public, and the class contains zero methods. It was originally introduced as a simple container class for some key data concerning animals, it was needed to share data between the Animal and the AnimalBrain. This quick hack was never refactored as it should have been, and we started building additional functionality on top of it, making the refactor more work. 
+
+The main issue with not following object oriented design in my mind is that it causes object functionality to be implemented outside the object. This prevents the logical grouping of methods and attributes. The code is easier to maintain if for instance; all the AnimalState logic is also handeled in the AnimalState class. Right now that logic is primarily handled by the Animal class. The Animal class does not handle the animal state in a logical way either. The AnimalState is calculated in the doGravity() function, and it should be handled in its own calculateState() function at least. We did not intend for the code to end up this way, it mostly evolved into it over time. We did not initially have a concept of state, we just calculated if the animal was grounded or not before doing gravity, which is why state calculations happen in doGravity(). 
+
+[Bone](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/AnimalSkeleton.cs) is the class for one of the animation bones in an animal. 
+
+Another similar example to AnimalState is the Bone class declared at the beginning of AnimalSkeleton.cs. It contains 3 members, the Transform of the bone and the lower/upper rotation limits. This class is bad for the same reasons as AnimalState, it causes the implementation of the Bone class to happen outside the Bone same as with the AnimalState. The Bone class should have an applyRotation(Quaternion rotation) function, which enforces the rotation constraints. This functionality is instead implemented in the Animal class, in the various places rotations are applied (such as in CCD). 
+
+These various bits of code mentioned here are things that we kind of implemented and forgot about. The lacking quality of the code became apparent as we were going back to old code when writing the bachelor thesis. Which made me think that maybe dedicating some time to just looking over and reviewing old code might be helpful. You will look at the code with a new perspective after some time has passed and your understanding of the code base is different. 
+
+### Refactored code example
+[Pre-AnimalSkeleton](https://github.com/Hifoz/TGAG/blob/ad9fc592706c0670775d5aa66091d2015da44a38/Assets/Scripts/WorldGen/AnimalSkeleton.cs)  
+[Post-AnimalSkeleton](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)  
+[Diff-AnimalSkeleton](https://github.com/Hifoz/TGAG/commit/4cce840e0357055cb02eb6f63e643bd55d8ee71e#diff-e2e4fd7d70a051652bcd8de3408a38fd)  
+
+The post version of AnimalSkeleton linked to here is not the final version of animal skeleton, but the version from the refactor pull request. 
+
 
 ### A personal reflection about professionalism in programming (Temp title)
-
+TODO
 
