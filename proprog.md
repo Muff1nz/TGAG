@@ -96,10 +96,9 @@ TODO
 ## Individual: Martin (Temp title)
 
 ### Good code example
-[BoneKeyFrames](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/BoneKeyFrames.cs)
 Even though this code is used as my example of good code, it has some issues. I did not stick to one of our coding conventions when writing it for instance, we were supposed to explicitly declare the protection level, even if not needed to by the compiler. I did not explicitly declare the member variables as private in this class. 
 
-BoneKeyFrames is a class for animating bones in an animal with forward kinematics.
+[BoneKeyFrames](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/BoneKeyFrames.cs) is a class for animating bones in an animal with forward kinematics.
 
 One good thing about the class is that it throws informative exceptions when something is wrong. BoneKeyFrames contains a set amount of frames for the animation, and the setters will throw an exception if you try to set an amount of key frames that differs from what you specified in the constructor. The exceptions thrown are generic System.Exception exceptions with a message, it could be improved by using a custom exception. The use of exceptions in this way makes the class more robust.
 
@@ -116,7 +115,7 @@ The AnimalState class is bad because it breaks with object oriented design by no
 
 The main issue with not following object oriented design in my mind is that it causes object functionality to be implemented outside the object. This prevents the logical grouping of methods and attributes. The code is easier to maintain if for instance; all the AnimalState logic is also handeled in the AnimalState class. Right now that logic is primarily handled by the Animal class. The Animal class does not handle the animal state in a logical way either. The AnimalState is calculated in the doGravity() function, and it should be handled in its own calculateState() function at least. We did not intend for the code to end up this way, it mostly evolved into it over time. We did not initially have a concept of state, we just calculated if the animal was grounded or not before doing gravity, which is why state calculations happen in doGravity(). 
 
-[Bone](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/AnimalSkeleton.cs) is the class for one of the animation bones in an animal. 
+[Bone](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/AnimalSkeleton.cs) is the class for one of the animation bones in an animal. (Class is defined at the top of AnimalSkeleton) 
 
 Another similar example to AnimalState is the Bone class declared at the beginning of AnimalSkeleton.cs. It contains 3 members, the Transform of the bone and the lower/upper rotation limits. This class is bad for the same reasons as AnimalState, it causes the implementation of the Bone class to happen outside the Bone same as with the AnimalState. The Bone class should have an applyRotation(Quaternion rotation) function, which enforces the rotation constraints. This functionality is instead implemented in the Animal class, in the various places rotations are applied (such as in CCD). 
 
