@@ -61,7 +61,13 @@ In our repository we had made it so that commiting to the master branch was not 
 ## Individual: Michael
 
 ### Good Code
-TODO
+[Link to code](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Utils/PoissonDiscSampler.cs)
+
+#### Code Quality
+The class was written so that it would be easy to use. The sampling process is separated into smaller functions based on logical chunks (generating points, validating points, adding valid points). The code also follows the code conventions we created at the start of the project.
+
+#### Quality of comments
+All the functions are commented properly according to the agreed on standard. Even if a parameter name is self-describing, there is a small explanation of what it is for. For paramteres with less obvoius names I wrote a bit more on them, so that it would be easily understandable, but I still tried to keep the descriptions of each parameter somewhat short.
 
 ### Bad Code
 [Link to code(NaiveMeshDataGenerator.GenerateCubeFace(...))](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)
