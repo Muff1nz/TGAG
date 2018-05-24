@@ -93,7 +93,9 @@ The refactor to NaiveMeshDataGenerator.GenerateCubeFace(...) means that I also h
 
 
 ### A personal reflection about professionalism in programming
-TODO
+For me, professional programming is about not programming so that only I can understand and work with the code, but so that other people understand, use and maintain/extend the code. It's also about finding the sweet spot between high-performing code and easily understood and maintainable code. I believe writing good documentation is important for this, because even if someone can read and understand what a part of the code is doing, they also need to understand its place in the bigger picture. Documentation is also important because no matter what, there will be code that is hard to understand, if only because there is no good way of doing it without sacrificing performance.
+
+The code and documentation is only one part of professional programming, another part is the process. If one sits down and starts working on something without planning, it is bound to end up a mess. If multiple people start working on a project together without a plan or proper communication, then conflicting ideas might lead to both bad code, and conflict in the team.
 
 
 
