@@ -98,7 +98,7 @@ For me, professional programming is about not programming so that only I can und
 The code and documentation is only one part of professional programming, another part is the process. If one sits down and starts working on something without planning, it is likely that the project will just end up as a mess. If multiple people start working on a project together without a plan or proper communication, then conflicting ideas might lead to both bad code, and conflict in the team.
 
 
-## Individual: Martin (Temp title)
+## Individual: Martin
 
 ### Good code example
 Even though this code is used as my example of good code, it has some issues. I did not stick to one of our coding conventions when writing it for instance, we were supposed to explicitly declare the protection level, even if not needed to by the compiler. I did not explicitly declare the member variables as private in this class. 
@@ -143,7 +143,7 @@ The downside of the refactor is that it makes the code more verbose, as we have 
 
 
 
-### Personal reflection about professionalism in programming:
+### Personal reflection about professionalism in programming
 To me professionalism in programming is in part about taking the time to do the “less fun” stuff such as documentation and commenting. If you document your code and process it will be easier for co-workers and other developers to continue you work. It will also be easier for you to go back to old code that you have written yourself if you documented what you did and how the code works. These are things that can be easy to ignore if you are working by yourself, where it might be easy to get carried away and only write code. 
 
 I think professionalism is also about how you write code, putting an emphasis on writing code for maintainability and readability. This can mean making design decisions that will have a negative impact on performance for the sake of making the code readable. This is a difficult choice to make coming from game development, since there is such a high focus on performance when it comes to games. 
