@@ -53,13 +53,17 @@ Outside of the Unity API and the .NET API we didn’t use any libraries. We did 
 
 ### Professionalism in Your Approach to Software Development
 The fact that we document our work, write detailed PR’s, do sprint reviews and meeting logs. 
-
+We documented our work through issues, pull request, smart commits, comments in the code and written meeting logs. 
 
 
 ### Use of Code Reviews
 In our repository we had made it so that commiting to master was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance. 
 
-
+
+
+### What We Would Have Done Differently
+(Taken more time to think about benchmarks to prevent changes in them)
+
 ## Individual: Michael
 
 ### Good Code
@@ -69,13 +73,13 @@ In our repository we had made it so that commiting to master was not possible, a
 The class was written so that it would be easy to use. The sampling process is separated into smaller functions based on logical chunks (generating points, validating points, adding valid points). The code also follows the code conventions we created at the start of the project and is written so that there should be no need for any comments inline in the functions.
 
 #### Quality of comments
-All the functions are commented properly according to the agreed on standard. Even if a parameter name is self-describing, there is a small explanation of what it is for. For paramteres with less obvoius names I wrote a bit more on them, so that it would be easily understandable, but I still tried to keep the descriptions of each parameter somewhat short.
+All the functions are commented properly according to the agreed on standard. Even if a parameter name is self-describing, there is a small explanation of what it is for. For parameters with less obvious names I wrote a bit more on them, so that it would be easily understandable, but I still tried to keep the descriptions of each parameter somewhat short.
 
 ### Bad Code
 [Link to code(NaiveMeshDataGenerator.GenerateCubeFace(...))](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)
 
 #### Code Quality
-The code contains a switch in where all branches do the same thing with different numbers, which means there is a lot of repitition, breaking with the DRY principles. It also causes the texture coordinate mapping to be more complex than it needs to (see [NaiveMeshDataGenerator.applyTextureCoordinates(...)](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L265)) because the order of the vertices are different for the different face directions.
+The code contains a switch in where all branches do the same thing with different numbers, which means there is a lot of repetition, breaking with the DRY principles. It also causes the texture coordinate mapping to be more complex than it needs to (see [NaiveMeshDataGenerator.applyTextureCoordinates(...)](https://github.com/Hifoz/TGAG/blob/f109a9fbffa9a72b2cd4d8168ae7eeef66c7ca11/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L265)) because the order of the vertices are different for the different face directions.
 
 
 #### Refactoring the Code
@@ -113,22 +117,38 @@ The [AnimalState](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Anima
 
 The AnimalState class is bad because it breaks with object oriented design by not hiding the underlying implementation. All of its members are public, and the class contains zero methods. It was originally introduced as a simple container class for some key data concerning animals, it was needed to share data between the Animal and the AnimalBrain. This quick hack was never refactored as it should have been, and we started building additional functionality on top of it, making the refactor more work. 
 
-The main issue with not following object oriented design in my mind is that it causes object functionality to be implemented outside the object. This prevents the logical grouping of methods and attributes. The code is easier to maintain if for instance; all the AnimalState logic is also handeled in the AnimalState class. Right now that logic is primarily handled by the Animal class. The Animal class does not handle the animal state in a logical way either. The AnimalState is calculated in the doGravity() function, and it should be handled in its own calculateState() function at least. We did not intend for the code to end up this way, it mostly evolved into it over time. We did not initially have a concept of state, we just calculated if the animal was grounded or not before doing gravity, which is why state calculations happen in doGravity(). 
+The main issue with not following object oriented design in my mind is that it causes object functionality to be implemented outside the object. This prevents the logical grouping of methods and attributes. The code is easier to maintain if for instance; all the AnimalState logic is also handeled in the AnimalState class. Right now that logic is primarily handled by the Animal class. The Animal class does not handle the animal state in a logical way either. The AnimalState is calculated in the doGravity() function, and it should be handled in its own calculateState() function at least. I did not intend for the code to end up this way, it mostly evolved into it over time. I did not initially have a concept of state, I just calculated if the animal was grounded or not before doing gravity, which is why state calculations happen in doGravity(). 
 
 [Bone](https://github.com/Hifoz/TGAG/blob/master/Assets/Scripts/Animals/AnimalSkeleton.cs) is the class for one of the animation bones in an animal. (Class is defined at the top of AnimalSkeleton) 
 
 Another similar example to AnimalState is the Bone class declared at the beginning of AnimalSkeleton.cs. It contains 3 members, the Transform of the bone and the lower/upper rotation limits. This class is bad for the same reasons as AnimalState, it causes the implementation of the Bone class to happen outside the Bone same as with the AnimalState. The Bone class should have an applyRotation(Quaternion rotation) function, which enforces the rotation constraints. This functionality is instead implemented in the Animal class, in the various places rotations are applied (such as in CCD). 
 
-These various bits of code mentioned here are things that we kind of implemented and forgot about. The lacking quality of the code became apparent as we were going back to old code when writing the bachelor thesis. Which made me think that maybe dedicating some time to just looking over and reviewing old code might be helpful. You will look at the code with a new perspective after some time has passed and your understanding of the code base is different. 
+These various bits of code mentioned here are things that i kind of implemented and forgot about. The lacking quality of the code became apparent as I were going back to old code when writing the bachelor thesis. Which made me think that maybe dedicating some time to just looking over and reviewing old code might be helpful. You will look at the code with a new perspective after some time has passed and your understanding of the code base is different. 
 
 ### Refactored code example
 [Pre-AnimalSkeleton](https://github.com/Hifoz/TGAG/blob/ad9fc592706c0670775d5aa66091d2015da44a38/Assets/Scripts/WorldGen/AnimalSkeleton.cs)  
 [Post-AnimalSkeleton](https://github.com/Hifoz/TGAG/blob/8032ff7d059cfbd9c36a7dd144337ee270f99781/Assets/Scripts/WorldGen/MeshGen/NaiveMeshDataGenerator.cs#L114)  
 [Diff-AnimalSkeleton](https://github.com/Hifoz/TGAG/commit/4cce840e0357055cb02eb6f63e643bd55d8ee71e#diff-e2e4fd7d70a051652bcd8de3408a38fd)  
 
-The post version of AnimalSkeleton linked to here is not the final version of animal skeleton, but the version from the refactor pull request. 
+AnimalSkeleton is the class responsible for defining and generating the body of an animal. The post version of AnimalSkeleton linked to here is not the final version of animal skeleton, but the version from the refactor pull request. The the final version the AnimalSkeleton is an abstract superclass, that specific animal types inherit from. At this point in development only one animal type was implemented. 
+
+The AnimalSkeleton generates a body for the animal based on a set of parameters such as legCount, legLength and so on. In the initial implementation these parameters were all individually declared as member variables of AnimalSkeleton, this is what the refactor addressed.
+
+The issues with declaring every parameter for the AnimalSkeleton as their own member attributes is that it gives us no logical grouping of the parameters, and it prevents us from being able to iterate over them. It is also not very scalable and adaptable, which is something we need it to be in order to support multiple different types of animals, all consisting of different sets of parameters. Initializing a set of let’s say 15 individual parameters using random number generators is also tedious and error prone due to the possibility of forgetting to initialize some parameters.
+
+The refactor solved these issues by introducing the concept of BodyParameters. A BodyParameter is an enum, which is used as a key to a MixedDicitonary. After the refactor the parameters of the animal are stored in a single MixedDictionary<BodyParameters>, and the possible ranges for each BodyParameter is stored in a second MixedDictionary<BodyParameters>. This gives us a logical grouping of the parameters by keeping all of them in a single dictionary. Every class that (in successive PR’s) inherits from AnimalSkeleton can populate the dictionaries with the BodyParameters relevant to the specific animal, instead of inheriting a whole range of “loose” parameter attributes or defining parameter attributes itself. Defining attributes is done by populating the bodyParametersRange dictionary with the ranges for each body parameter. The AnimalSkeleton will then iterate through bodyParametersRange to automatically generate the final bodyParameters dictionary. This makes it so that we don’t have to manually specify which BodyParameters we want and manually do their initialization. 
+
+The downside of the refactor is that it makes the code more verbose, as we have to access a dictionary with an enum when we want to get a BodyParameter. There is also a slight performance hit to doing dictionary access as opposed to directly accessing a member attribute. I feel like these downsides are outweighed by having logical grouping of parameters and automatic initialization of parameter values.  
 
 
-### A personal reflection about professionalism in programming (Temp title)
-TODO
 
+### Personal reflection about professionalism in programming:
+To me professionalism in programming is in part about taking the time to do the “less fun” stuff such as documentation and commenting. If you document your code and process it will be easier for co-workers and other developers to continue you work. It will also be easier for you to go back to old code that you have written yourself if you documented what you did and how the code works. These are things that can be easy to ignore if you are working by yourself, where it might be easy to get carried away and only write code. 
+
+I think professionalism is also about how you write code, putting an emphasis on writing code for maintainability and readability. This can mean making design decisions that will have a negative impact on performance for the sake of making the code readable. This is a difficult choice to make coming from game development, since there is such a high focus on performance when it comes to games. 
+
+Professionalism is also about using a proper development process. Before i started studying and early on in the studies i would never use any process, i would just sit down and write code. This was fine in the beginning, because all of the projects were small and i was working alone. When it comes to bigger projects involving multiple people, this stops working. There is a need for overview of the development, and proper delegation of work amongst the team members. Using a method such as scrum or kanban makes a big difference here. I also found after learning these methods that they are helpful even when working alone. Making a sprint board with various cards for bugs or new features is helpful in giving an overview even when alone. It acts as a method of dividing and conquering the implementation. 
+
+Professionalism is also about trying to give up the “not invented here syndrome” i think. Swallowing your pride and using good solutions developed by other people can be a productive thing to do. There is a large amount of good open source systems and libraries out there, which can speed up development by reducing the amount of work needed to be done.
+
+There is more to professionalism then just developing software as well. As a developer you have some responsibility in regards to your employer and society. This can cause conflicts of interest, when your employers interest seems to conflict with the good of society. Let’s say for instance that the employer is asking you to willingly break the new GDPR regulations for monetary gain. Your options in this scenario do not seem good, on one hand you could whistleblow, which is in the interest of society.  However this could lead to you losing your job, and potentially the jobs of your colleagues. So you would have to choose between causing damage on a local or national scale. It is hard to say which decision is right here, and you would have to base it on your personal values i think. 
