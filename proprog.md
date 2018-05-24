@@ -1,6 +1,4 @@
 
-## From submission @confluence
-
 ### A list of the name of the students in the team  
 Michael Bråten  
 Martin Bjerknes  
@@ -16,7 +14,6 @@ Noise function and ChunkVoxelDataGenerator prototype: https://github.com/Muff1nz
 ## Group Discussion
 
 ### Strengths and Weaknesses of Languages Used in the Project
-C#, shaderlab, hlsl. C# (multiple inheritance, lack of pointers, so if you want a reference to a simple value, you must wrap it in a class first. Memory management, GC (good or bad)). Shaderlab, high level, easier then GLSL, less control, multi compile. 
 
 #### C#
 The main language in our project is C#. One issue we encountered with C# was the lack of multiple inheritance when implementing the animals. We wanted the animal behaviour and animal functionality to have their own inheritance trees, we would then implement the animals through multiple inheritance. Since this was not possible we instead implemented behaviour through composition. The lack of multiple inheritance is not an issue that can not be overcome, you can work around it using alternative solutions as we did. 
@@ -40,21 +37,24 @@ We made sure to always be available on discord when we were awake, so that we co
 Trello was used as our sprint board, to give us an overview and delegate the various pieces of development. We would make cards for various pieces of work to be done, this could be things such as a new feature or a bug fix. During every sprint review we would each select which cards we would work on during the next sprint. Without trello or a tool like it we would have trouble keeping tabs on what the other team member is working on. Something we could have looked into is integration between trello and GitHub, so that smart commits and pull request could be associated with the trello cards. 
 
 ### Use of Version Control Systems, Ticket Tracking, Branching, Version Control
-git, github. Before the bachelor we did not use feature branches, now we did. We would check out old commits when inspecting the effects of new changes.  
 
 For version control we used Git, hosted on GitHub. We used the issue board on GitHub to keep track of any bugs we found while testing. When working on an issue, we also added it to the Trello board. When we were implementing new features, or fixing bugs we would work in feature branches. Using feature branches was not something we had been doing before  this project. Previously we would have one branch per person. Using feature branches made it so that we could see from only the branch name what was being worked on, and one person could work on multiple issues as well (unlike one branch per person, where we would have to wait for our code to be reviewed before we could start working on something else in the branch). 
 
-### Programming and commenting style guide
-https://docs.google.com/document/d/19iqSOXVe7pn26eSybdBrjFK4kj44F9KbRVmF8MOfbSE/edit?usp=sharing
+### Programming and commenting style guide  
+[Link to coding conventions doc](https://docs.google.com/document/d/19iqSOXVe7pn26eSybdBrjFK4kj44F9KbRVmF8MOfbSE/edit?usp=sharing ) 
+
+For the comments, we ended up sticking with the way Microsoft recommended we document, but for the code we decided on our own conventions. The reason for using our own coding convention was mostly because we had already gotten used to writing our code using these conventions from previous projects (with some modifications). As we hadn’t really been so thorough with documentation in any previous C# projects, we went with the recommended style. 
 
 
 ### Use of Libraries and Integration of Libraries
-Outside of the Unity API and the .NET API we didn’t use any libraries. We did however use KinoFog, a Unity package that is used to create a fade-to-skybox world fog.
+Outside of the Unity API and the .NET API we didn’t use any libraries. We did however use KinoFog, a Unity package that is used to create a fade-to-skybox world fog. We had to change KinoFog slightly, to make it support interpolation between multiple skyboxes caused by the corruption. 
 
 ### Professionalism in Your Approach to Software Development
-The fact that we document our work, write detailed PR’s, do sprint reviews and meeting logs. 
-We documented our work through issues, pull request, smart commits, comments in the code and written meeting logs. 
+We documented our work through issues, pull request, smart commits, comments in the code and written meeting logs. In the pull requests we tried to document what we had done, such as new features, refactoring and performance impact. This makes the pull requests more informative and useful when going back to look over the development. 
 
+In addition to documenting our work we made various tools to support the development of the project, which are: RealBench, SynBench and DebugTool. RealBench and SynBench are benchmarks used for measuring the performance of the game. We use them when optimizing the code to measure the performance impact of our code changes. This gives us an objective data driven optimization workflow. 
+
+DebugTool is an ingame debugging tool that exposes key aspects of the internal game state when enabled. This allows us to debug issues the first time we encounter them, because the debugging tool is always implemented and ready to be enabled. The alternative is using visual studios debugger or print statements in the code, both of which require the reproduction of bugs because you have to enable/implement them in advance. 
 
 ### Use of Code Reviews
 In our repository we had made it so that commiting to master was not possible, and Pull Requests would have to be reviewed before they could be merged. To review a pull request we would first make sure that the game would run. We would then look at for any bugs in the implemented feature, and in any systems that could be affected by the system. We would also look at the code to make sure there were no obvious issues with the code that could cause problems in the future. After the creation of some performance benchmarking tools, we would also run these on the PRs to make sure they did not cause significant degradation of the game’s performance. 
@@ -62,7 +62,7 @@ In our repository we had made it so that commiting to master was not possible, a
 
 
 ### What We Would Have Done Differently
-(Taken more time to think about benchmarks to prevent changes in them)
+One thing we would have done differently if we were to develop the game again is thinking more about the implementation of the benchmarks. We ended up changing the benchmarks somewhat throughout development, this hurts the comparability with previous benchmark data. We should have designed them with such care that minimal changes would be necessary to prevent this. 
 
 ## Individual: Michael
 
@@ -96,7 +96,6 @@ The refactor to NaiveMeshDataGenerator.GenerateCubeFace(...) means that I also h
 For me, professional programming is about not programming so that only I can understand and work with the code, but so that other people understand, use and maintain/extend the code. It's also about finding the sweet spot between high-performing code and easily understood and maintainable code. I believe writing good documentation is important for this, because even if someone can read and understand what a part of the code is doing, they also need to understand its place in the bigger picture. Documentation is also important because no matter what, there will be code that is hard to understand, if only because there is no good way of doing it without sacrificing performance.
 
 The code and documentation is only one part of professional programming, another part is the process. If one sits down and starts working on something without planning, it is likely that the project will just end up as a mess. If multiple people start working on a project together without a plan or proper communication, then conflicting ideas might lead to both bad code, and conflict in the team.
-
 
 
 ## Individual: Martin (Temp title)
