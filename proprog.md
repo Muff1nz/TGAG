@@ -1,5 +1,5 @@
 
-### A list of the name of the students in the team  
+### Team Members 
 Michael Bråten  
 Martin Bjerknes  
 
