@@ -20,7 +20,7 @@ The main language in our project is C#. One issue we encountered with C# was the
 
 C# is a somewhat high level language, compared to languages such as C and C++ in that it does the memory management for us. There are two sides to the automatic memory management. On one hand it is convenient that we do not have to worry about it, we can just allocate memory without giving it much thought. This can lead to an increase in productivity by lowering the difficulty of implementing something. A negative aspect of the automatic memory management is that it gives us less control and comes with some overhead. 
 
-A feature we miss in C# that is present in C and C++ is pointers. If you want to maintain a reference to simple types in C# you must first wrap them in a class. Wheres you could just create a pointer to solve the same issue in C or C++. C# has classes and structs, where classes are reference types and structs are value types. This gives us some control of whether or not we want a value or a reference, however it is not as much control as C/C++ pointers give. 
+A feature we miss in C# that is present in C and C++ is pointers. If you want to maintain a reference to simple types in C# you must first wrap them in a class. Whereas you could just create a pointer to solve the same issue in C or C++. C# has classes and structs, where classes are reference types and structs are value types. This gives us some control of whether or not we want a value or a reference, however it is not as much control as C/C++ pointers give. 
 
 
 #### ShaderLab/HLSL
