@@ -47,7 +47,7 @@ For the comments, we ended up sticking with the way Microsoft recommended we doc
 
 
 ### Use of Libraries and Integration of Libraries
-Outside of the Unity API and the .NET API we didn’t use any libraries. We did however use KinoFog, a Unity package that is used to create a fade-to-skybox world fog. We had to change KinoFog slightly, to make it support interpolation between multiple skyboxes caused by the corruption. 
+Outside of the Unity API and the .NET API we didn’t use any libraries. We did however use KinoFog, an open source Unity package that is used to create a fade-to-skybox world fog. We had to change KinoFog slightly, to make it support interpolation between multiple skyboxes caused by the corruption. 
 
 ### Professionalism in Your Approach to Software Development
 We documented our work through issues, pull request, smart commits, comments in the code and written meeting logs. In the pull requests we tried to document what we had done, such as new features, refactoring and performance impact. This makes the pull requests more informative and useful when going back to look over the development. 
